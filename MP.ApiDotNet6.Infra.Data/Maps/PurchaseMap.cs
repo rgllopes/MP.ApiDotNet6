@@ -8,22 +8,22 @@ namespace MP.ApiDotNet6.Infra.Data.Maps
     {
         public void Configure(EntityTypeBuilder<Purchase> builder)
         {
-            builder.ToTable("Compra");
+            builder.ToTable("compra");
 
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
-                .HasColumnName("IdCompra")
+                .HasColumnName("idcompra")
                 .UseIdentityColumn();
 
             builder.Property(x => x.PersonId)
-                .HasColumnName("IdPessoa");
+                .HasColumnName("idpessoa");
 
             builder.Property(x => x.ProductId)
-                .HasColumnName("IdProduto");
+                .HasColumnName("idproduto");
 
             builder.Property(x => x.Date)
-                .HasColumnName("DataCompra");
+                .HasColumnName("datacompra");
 
             //Relacionamento de um para muitos de acordo com a relação da base de dados
             builder.HasOne(x => x.Person)
