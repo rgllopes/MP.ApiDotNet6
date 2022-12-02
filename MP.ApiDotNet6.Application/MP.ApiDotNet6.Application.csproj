@@ -10,4 +10,9 @@
     <ProjectReference Include="..\MP.ApiDotNet6.Domain\MP.ApiDotNet6.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="FluentValidation" Version="10.4.0" />
+  </ItemGroup>
+
 </Project>
