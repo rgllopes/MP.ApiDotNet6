@@ -17,14 +17,23 @@ namespace MP.ApiDotNet6.Infra.IoC
             services.AddDbContext<ApplicationDbContext>(options => 
                                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
+            //Injeção de dependencia dos repositórios
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+
             return services;
         }
 
         public static IServiceCollection AddService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAutoMapper(typeof(DomainToDtoMapping));
+
+            //Injeção de dependencia dos services
             services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IPurchaseService, PurchaseService>();
+
             return services;
         }
         

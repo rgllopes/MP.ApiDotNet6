@@ -7,40 +7,46 @@ namespace MP.ApiDotNet6.Infra.Data.Repositories
 {
     public class PersonRepository : IPersonRepository
     {
-        private readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext _dbContex;
 
-        public PersonRepository(ApplicationDbContext db)
+        public PersonRepository(ApplicationDbContext dbContex)
         {
-            _db = db;
+            _dbContex = dbContex;
         }
 
         public async Task<Person> CreateAsync(Person person)
         {
-            _db.Add(person);
-            await _db.SaveChangesAsync();
+            _dbContex.Add(person);
+            await _dbContex.SaveChangesAsync();
             return person;
         }
 
         public async Task DeleteAsync(Person person)
         {
-            _db.Remove(person);
-            await _db.SaveChangesAsync();
+            _dbContex.Remove(person);
+            await _dbContex.SaveChangesAsync();
         }
 
         public async Task EditAsync(Person person)
         {
-            _db.Update(person);
-            await _db.SaveChangesAsync();
+            _dbContex.Update(person);
+            await _dbContex.SaveChangesAsync();
         }
 
         public async Task<Person> GetByIdAsync(int id)
         {
-            return await _db.People.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContex.People.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<int> GetIdByDocumentAsync(string document)
+        {
+            //Busca código ERP, se não encontrar envia 0
+            return (await _dbContex.People.FirstOrDefaultAsync(x => x.Document == document))?.Id ?? 0;
         }
 
         public async Task<ICollection<Person>> GetPeopleAsync()
         {
-            return await _db.People.ToListAsync();
+            return await _dbContex.People.ToListAsync();
         }
     }
 }

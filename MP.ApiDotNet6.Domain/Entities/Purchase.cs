@@ -25,8 +25,8 @@ namespace MP.ApiDotNet6.Domain.Entities
 
         private void Validation(int productId, int personId)
         {
-            DomainValidationException.When(personId < 0, "Id do produto deve ser informado!");
-            DomainValidationException.When(personId < 0, "Id da pessoa deve ser informado!");
+            DomainValidationException.When(personId <= 0, "Id do produto deve ser informado!");
+            DomainValidationException.When(personId <= 0, "Id da pessoa deve ser informado!");
 
             ProductId = productId;
             PersonId = personId;

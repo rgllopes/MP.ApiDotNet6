@@ -6,19 +6,19 @@ namespace MP.ApiDotNet6.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonController : ControllerBase
+    public class ProductController : ControllerBase
     {
-        private readonly IPersonService _personService;
+        private readonly IProductService _productService;
 
-        public PersonController(IPersonService personService)
-        {
-            _personService = personService;
+        public ProductController(IProductService productService) 
+        { 
+            _productService = productService;
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostAsync([FromBody] PersonDTO personDTO)
+        public async Task<ActionResult> PostAsync([FromBody] ProductDTO productDTO)
         {
-            var result = await _personService.CreateAsync(personDTO);
+            var result = await _productService.CreateAsync(productDTO);
             if(result.IsSuccess)
                 return Ok(result);
 
@@ -28,27 +28,28 @@ namespace MP.ApiDotNet6.Api.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAsync()
         {
-            var result = await _personService.GetAsync();
-            if(result.IsSuccess)
+            var result = await _productService.GetAsync();
+            if (result.IsSuccess)
                 return Ok(result);
-            
+
             return BadRequest(result);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult> GetByIdAsync(int id)
+        public async Task<ActionResult> GetByIdSync(int id)
         {
-            var result = await _personService.GetByIsAsync(id);
+            var result = await _productService.GetByIdAsync(id);
             if(result.IsSuccess)
                 return Ok(result);
+
             return BadRequest(result);
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromBody] PersonDTO personDTO)
+        public async Task<ActionResult> UpdateAsync([FromBody] ProductDTO productDTO)
         {
-            var result = await _personService.UpdateAsync(personDTO);
+            var result = await _productService.UpdateAsync(productDTO);
             if (result.IsSuccess)
                 return Ok(result);
 
@@ -57,9 +58,9 @@ namespace MP.ApiDotNet6.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<ActionResult> DleteAsync(int id)
+        public async Task<ActionResult> PostAsync(int id)
         {
-            var result = await _personService.DeleteAsync(id);
+            var result = await _productService.DeleteAsync(id);
             if (result.IsSuccess)
                 return Ok(result);
 

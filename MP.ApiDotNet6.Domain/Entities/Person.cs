@@ -4,18 +4,20 @@ namespace MP.ApiDotNet6.Domain.Entities
 {
     public sealed class Person
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Document { get; set; }
-        public string Phone { get; set; }
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public string Document { get; private set; }
+        public string Phone { get; private set; }
         public ICollection<Purchase> Purchases { get; set; }
 
-        public Person(string document, string name, string phone)
+        //Construtor para criar um registro
+        public Person(string name, string document, string phone)
         {
-            Validation(document, name, phone);
+            Validation(name, document, phone);
             Purchases = new List<Purchase>();
         }
 
+        //Construtor para editar um registro
         public Person(int id, string name, string document, string phone) 
         {
             DomainValidationException.When(id < 0, "Id deve ser maior que zero");
@@ -24,7 +26,7 @@ namespace MP.ApiDotNet6.Domain.Entities
             Purchases = new List<Purchase>();
         }
 
-        private void Validation(string document, string name, string phone)
+        private void Validation(string name, string document, string phone)
         {
             DomainValidationException.When(string.IsNullOrEmpty(name), "Nome deve ser informado!");
             DomainValidationException.When(string.IsNullOrEmpty(document), "Documento deve ser informado!");

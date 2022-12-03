@@ -8,40 +8,46 @@ namespace MP.ApiDotNet6.Infra.Data.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext _dbContex;
 
-        public ProductRepository(ApplicationDbContext db)
+        public ProductRepository(ApplicationDbContext dbContex)
         {
-            _db = db;
+            _dbContex = dbContex;
         }
 
         public async Task<Product> CreateAsync(Product product)
         {
-            _db.Add(product);
-            await _db.SaveChangesAsync();
+            _dbContex.Add(product);
+            await _dbContex.SaveChangesAsync();
             return product;
         }
 
         public async Task DeleteAsync(Product product)
         {
-            _db.Remove(product);
-            await _db.SaveChangesAsync();
+            _dbContex.Remove(product);
+            await _dbContex.SaveChangesAsync();
         }
 
         public async Task EditAsync(Product product)
         {
-            _db.Update(product);
-            await _db.SaveChangesAsync();
+            _dbContex.Update(product);
+            await _dbContex.SaveChangesAsync();
         }
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return await _db.Product.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContex.Product.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<ICollection<Product>> GetPeopleAsync()
+        public async Task<int> GetIdByCodErpAsync(string codErp)
         {
-            return await _db.Product.ToListAsync();
+            //Busca código ERP, se não encontrar envia 0
+            return (await _dbContex.Product.FirstOrDefaultAsync(x => x.CodErp == codErp)) ?.Id ?? 0;
+        }
+
+        public async Task<ICollection<Product>> GetProducAsync()
+        {
+            return await _dbContex.Product.ToListAsync();
         }
     }
 }

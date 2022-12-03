@@ -23,6 +23,7 @@ namespace MP.ApiDotNet6.Infra.Data.Maps
                 .HasColumnName("idproduto");
 
             builder.Property(x => x.Date)
+                .HasColumnType("date")
                 .HasColumnName("datacompra");
 
             //Relacionamento de um para muitos de acordo com a relação da base de dados

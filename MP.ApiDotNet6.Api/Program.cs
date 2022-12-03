@@ -1,4 +1,5 @@
 using MP.ApiDotNet6.Infra.IoC;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,12 @@ builder.Services.AddSwaggerGen();
 //Referencia as dependencias de IoC DependencyInjection
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddService(builder.Configuration);
+
+//Remove parametros nulos nas respostas dos endpoints
+builder.Services.AddMvc().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+});
 
 var app = builder.Build();
 

@@ -1,5 +1,4 @@
 ﻿using FluentValidation.Results;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MP.ApiDotNet6.Application.Services
 {
@@ -15,7 +14,7 @@ namespace MP.ApiDotNet6.Application.Services
             {
                 IsSuccess = false,
                 Message = message,
-                Errors = validationResult.Errors.Select(x => new ErrorValidation { Field = x.PropertyName, Message = x.ErrorMessage }).ToList(),
+                Errors = validationResult.Errors.Select(x => new ErrorValidation { Field = x.PropertyName, Message = x.ErrorMessage }).ToList()
             };
         }
 
@@ -25,7 +24,7 @@ namespace MP.ApiDotNet6.Application.Services
             {
                 IsSuccess = false,
                 Message = message,
-                Errors = validationResult.Errors.Select(x => new ErrorValidation { Field = x.PropertyName, Message = x.ErrorMessage }).ToList(),
+                Errors = validationResult.Errors.Select(x => new ErrorValidation { Field = x.PropertyName, Message = x.ErrorMessage }).ToList()
             };
         }
 
@@ -38,6 +37,6 @@ namespace MP.ApiDotNet6.Application.Services
 
     public class ResultService<T> : ResultService
     {
-        public T? Data { get; set; }
+        public T Data { get; set; }
     }
 }
