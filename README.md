@@ -1,4 +1,4 @@
-# MP.ApiDotNet6
+# API Restful .Net Core 6
 
 ### Treinamento para desenvolvimento de API em .Net Core 6
 
