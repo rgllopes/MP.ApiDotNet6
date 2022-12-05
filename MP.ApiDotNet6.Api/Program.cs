@@ -45,10 +45,10 @@ builder.Services.AddSwaggerGen(c =>
     {
         Description = "Autenticação em JWT. Ex: Bearer {token}",
         Name = "Authorization",
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        In = ParameterLocation.Header,
         Scheme = "Bearer"
     });
-    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement()
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
     {
         {
             new OpenApiSecurityScheme

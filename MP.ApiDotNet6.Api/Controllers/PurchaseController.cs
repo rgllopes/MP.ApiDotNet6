@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MP.ApiDotNet6.Application.DTOs.Purchase;
 using MP.ApiDotNet6.Application.Services;
 using MP.ApiDotNet6.Application.Services.Interface;
@@ -6,6 +7,7 @@ using MP.ApiDotNet6.Domain.Validations;
 
 namespace MP.ApiDotNet6.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PurchaseController : ControllerBase

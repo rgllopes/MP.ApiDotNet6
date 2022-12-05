@@ -6,7 +6,7 @@ using MP.ApiDotNet6.Domain.FiltersDb;
 
 namespace MP.ApiDotNet6.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PersonController : ControllerBase
