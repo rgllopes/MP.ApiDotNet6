@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MP.ApiDotNet6.Application.DTOs;
+using MP.ApiDotNet6.Application.DTOs.Product;
 using MP.ApiDotNet6.Application.Services.Interface;
 
 namespace MP.ApiDotNet6.Api.Controllers
@@ -16,7 +16,7 @@ namespace MP.ApiDotNet6.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostAsync([FromBody] ProductDTO productDTO)
+        public async Task<IActionResult> PostAsync([FromBody] ProductDTO productDTO)
         {
             var result = await _productService.CreateAsync(productDTO);
             if(result.IsSuccess)
@@ -26,7 +26,7 @@ namespace MP.ApiDotNet6.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAsync()
+        public async Task<IActionResult> GetAsync()
         {
             var result = await _productService.GetAsync();
             if (result.IsSuccess)
@@ -37,7 +37,7 @@ namespace MP.ApiDotNet6.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult> GetByIdSync(int id)
+        public async Task<IActionResult> GetByIdSync(int id)
         {
             var result = await _productService.GetByIdAsync(id);
             if(result.IsSuccess)
@@ -47,7 +47,7 @@ namespace MP.ApiDotNet6.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromBody] ProductDTO productDTO)
+        public async Task<IActionResult> UpdateAsync([FromBody] ProductDTO productDTO)
         {
             var result = await _productService.UpdateAsync(productDTO);
             if (result.IsSuccess)
@@ -58,9 +58,9 @@ namespace MP.ApiDotNet6.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<ActionResult> PostAsync(int id)
+        public async Task<IActionResult> PostAsync(int id)
         {
-            var result = await _productService.DeleteAsync(id);
+            var result = await _productService.RemoveAsync(id);
             if (result.IsSuccess)
                 return Ok(result);
 

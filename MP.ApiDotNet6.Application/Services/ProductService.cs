@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using MP.ApiDotNet6.Application.DTOs;
+using MP.ApiDotNet6.Application.DTOs.Product;
 using MP.ApiDotNet6.Application.DTOs.Validations;
 using MP.ApiDotNet6.Application.Services.Interface;
 using MP.ApiDotNet6.Domain.Entities;
@@ -35,7 +35,7 @@ namespace MP.ApiDotNet6.Application.Services
             return ResultService.Ok(_mapper.Map<ProductDTO>(data));
         }
 
-        public async Task<ResultService> DeleteAsync(int id)
+        public async Task<ResultService> RemoveAsync(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
             if (product == null)

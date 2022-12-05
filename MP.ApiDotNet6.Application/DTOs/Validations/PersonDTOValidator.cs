@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using MP.ApiDotNet6.Application.DTOs.Person;
 
 namespace MP.ApiDotNet6.Application.DTOs.Validations
 {

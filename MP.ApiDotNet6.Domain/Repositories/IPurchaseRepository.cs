@@ -7,7 +7,8 @@ namespace MP.ApiDotNet6.Domain.Repositories
         Task<Purchase> GetByIdAsync(int id);
         Task<ICollection<Purchase>> GetPeopleAsync();
         Task<Purchase> CreateAsync(Purchase purchase);
-        Task EditAsync(Product purchase);
-        Task DeleteAsync(Product purchase);
+        Task EditAsync(Purchase purchase);
+        Task DeleteAsync(Purchase purchase);
+        Task<ICollection<Purchase>> GetAllAsync();
     }
 }

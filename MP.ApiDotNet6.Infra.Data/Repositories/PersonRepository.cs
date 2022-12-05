@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MP.ApiDotNet6.Domain.Entities;
+using MP.ApiDotNet6.Domain.FiltersDb;
 using MP.ApiDotNet6.Domain.Repositories;
 using MP.ApiDotNet6.Infra.Data.Context;
 
@@ -42,6 +43,16 @@ namespace MP.ApiDotNet6.Infra.Data.Repositories
         {
             //Busca código ERP, se não encontrar envia 0
             return (await _dbContex.People.FirstOrDefaultAsync(x => x.Document == document))?.Id ?? 0;
+        }
+
+        public async Task<PagedBaseResponse<Person>> GetPagedAsync(PersonFilterDb request)
+        {
+            var people = _dbContex.People.AsQueryable();
+            if(string.IsNullOrEmpty(request.Name))
+                people = people.Where(x => x.Name.Contains(request.Name));
+
+            return await PagedBaseResponseHelper
+                .GetResponseAsync<PagedBaseResponse<Person>, Person>(people, request);
         }
 
         public async Task<ICollection<Person>> GetPeopleAsync()

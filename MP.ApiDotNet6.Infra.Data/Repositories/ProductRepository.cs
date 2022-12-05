@@ -36,18 +36,18 @@ namespace MP.ApiDotNet6.Infra.Data.Repositories
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return await _dbContex.Product.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContex.Products.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<int> GetIdByCodErpAsync(string codErp)
         {
             //Busca código ERP, se não encontrar envia 0
-            return (await _dbContex.Product.FirstOrDefaultAsync(x => x.CodErp == codErp)) ?.Id ?? 0;
+            return (await _dbContex.Products.FirstOrDefaultAsync(x => x.CodErp == codErp)) ?.Id ?? 0;
         }
 
         public async Task<ICollection<Product>> GetProducAsync()
         {
-            return await _dbContex.Product.ToListAsync();
+            return await _dbContex.Products.ToListAsync();
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using MP.ApiDotNet6.Application.DTOs;
+using MP.ApiDotNet6.Application.DTOs.Person;
 using MP.ApiDotNet6.Application.DTOs.Validations;
 using MP.ApiDotNet6.Application.Services.Interface;
 using MP.ApiDotNet6.Domain.Entities;
+using MP.ApiDotNet6.Domain.FiltersDb;
 using MP.ApiDotNet6.Domain.Repositories;
 
 namespace MP.ApiDotNet6.Application.Services
@@ -54,6 +56,15 @@ namespace MP.ApiDotNet6.Application.Services
             if (person == null)
                 return ResultService.Fail<PersonDTO>("Pessoa não encontrada!");
             return ResultService.Ok(_mapper.Map<PersonDTO>(person));
+        }
+
+        public async Task<ResultService<PagedBaseResponseDTO<PersonDTO>>> GetPagedAsync(PersonFilterDb personFilterDb)
+        {
+            var poeplePaged = await _personRepository.GetPagedAsync(personFilterDb);
+            var result = new PagedBaseResponseDTO<PersonDTO>(poeplePaged.TotalPages, 
+                    _mapper.Map<List<PersonDTO>>(poeplePaged.Data));
+
+            return ResultService.Ok(result);
         }
 
         public async Task<ResultService> UpdateAsync(PersonDTO personDTO)

@@ -1,4 +1,4 @@
-﻿namespace MP.ApiDotNet6.Application.DTOs
+﻿namespace MP.ApiDotNet6.Application.DTOs.Product
 {
     public class ProductDTO
     {

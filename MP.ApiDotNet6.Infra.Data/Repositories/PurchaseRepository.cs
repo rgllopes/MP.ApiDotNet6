@@ -22,26 +22,53 @@ namespace MP.ApiDotNet6.Infra.Data.Repositories
             return purchase;
         }
 
-        public async Task DeleteAsync(Product purchase)
+        public async Task DeleteAsync(Purchase purchase)
         {
             _db.Remove(purchase);
             await _db.SaveChangesAsync();
         }
 
-        public async Task EditAsync(Product purchase)
+        public async Task EditAsync(Purchase purchase)
         {
             _db.Update(purchase);
             await _db.SaveChangesAsync();
         }
 
+        public async Task<ICollection<Purchase>> GetAllAsync()
+        {
+            return await _db.Purchases
+                .Include(x => x.Person)
+                .Include(x => x.Product)
+                .ToListAsync();
+        }
+
         public async Task<Purchase> GetByIdAsync(int id)
         {
-            return await _db.Purchase.FirstOrDefaultAsync(x => x.Id == id);
+            return await _db.Purchases
+                .Include(x => x.Person)
+                .Include(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ICollection<Purchase>> GetPeopleAsync()
         {
-            return await _db.Purchase.ToListAsync();
+            return await _db.Purchases.ToListAsync();
+        }
+
+        public async Task<ICollection<Purchase>> GetByPersonIdAsync(int personId)
+        {
+            return await _db.Purchases
+                    .Include(x => x.Person)
+                    .Include(x => x.Product)
+                    .Where(x => x.PersonId == personId).ToListAsync();
+        }
+
+        public async Task<ICollection<Purchase>> GetByProductIdAsync(int productId)
+        {
+            return await _db.Purchases
+                .Include(x => x.Product)
+                .Include(x => x.Person)
+                .Where(x => x.ProductId == productId).ToListAsync();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using MP.ApiDotNet6.Application.DTOs;
+﻿using MP.ApiDotNet6.Application.DTOs.Product;
 
 namespace MP.ApiDotNet6.Application.Services.Interface
 {
@@ -8,6 +8,6 @@ namespace MP.ApiDotNet6.Application.Services.Interface
         Task<ResultService<ProductDTO>> GetByIdAsync(int id);
         Task<ResultService<ICollection<ProductDTO>>> GetAsync();
         Task<ResultService> UpdateAsync(ProductDTO productDTO);
-        Task<ResultService> DeleteAsync(int id);
+        Task<ResultService> RemoveAsync(int id);
     }
 }
